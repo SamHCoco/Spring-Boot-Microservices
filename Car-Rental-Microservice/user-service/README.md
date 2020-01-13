@@ -43,14 +43,14 @@ JSON structure for *User* object in request body for POST requests:
   "lastName": "Thornton",
 
   "contact": {"email": "sarah-thornton@email.co.uk",
-	          "phoneNumber": "+445555555"
+              "phoneNumber": "+445555555"
              },
 
   "address": {"street": "80 Church Road",
-	          "city": "Reading",
+	            "city": "Reading",
               "postcode": "PF3 0ED",
-	          "location": "south-UK"
-	         }
+	            "location": "south-UK"
+	           }
 }
 ```
 *Example User JSON object*
