@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -39,7 +40,7 @@ public class UserController {
      * or HTTP status 400 (BAD REQUEST) if the user could not be added.
      */
     @PostMapping("api/users")
-    public ResponseEntity addUser(@RequestBody User user){
+    public ResponseEntity addUser(@Valid @RequestBody User user){
         boolean added = userService.addUser(user);
 
         if(added){
