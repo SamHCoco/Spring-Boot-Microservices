@@ -1,16 +1,30 @@
 package com.SamHCoco.microservices.user.service.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User {
 
-    // todo - validate fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull(message = "USERNAME cannot be null")
+    @NotEmpty(message = "USERNAME cannot be empty")
+    @Size(min = 1, max = 30, message = "USERNAME must be 1 to 30 characters long")
     private String userName;
+
+    @NotNull(message = "FIRST NAME cannot be null")
+    @NotEmpty(message = "FIRST NAME cannot be empty")
+    @Size(min = 1, max = 30, message = "FIRST NAME must be 1 to 30 characters long")
     private String firstName;
+
+    @NotNull(message = "LAST NAME cannot be null")
+    @NotEmpty(message = "LAST NAME cannot be empty")
+    @Size(min = 1, max = 30, message = "LAST NAME must be 1 to 30 characters long")
     private String lastName;
 
     @Embedded
@@ -19,6 +33,7 @@ public class User {
     @Embedded
     private Contact contact;
 
+    // empty constructor for Hibernate to work with
     public User(){
 
     }
