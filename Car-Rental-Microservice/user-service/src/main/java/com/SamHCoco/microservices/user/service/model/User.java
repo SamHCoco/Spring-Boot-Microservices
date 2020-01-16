@@ -1,6 +1,7 @@
 package com.SamHCoco.microservices.user.service.model;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,9 +28,11 @@ public class User {
     @Size(min = 1, max = 30, message = "LAST NAME must be 1 to 30 characters long")
     private String lastName;
 
+    @Valid
     @Embedded
     private Address address;
 
+    @Valid
     @Embedded
     private Contact contact;
 
