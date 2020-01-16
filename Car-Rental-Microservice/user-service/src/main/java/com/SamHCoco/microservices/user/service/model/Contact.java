@@ -1,11 +1,18 @@
 package com.SamHCoco.microservices.user.service.model;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
 public class Contact {
 
+    @NotEmpty
+    @NotNull
     private String phoneNumber;
+
+    @NotEmpty
+    @NotNull
     private String email;
 
     public Contact(){
