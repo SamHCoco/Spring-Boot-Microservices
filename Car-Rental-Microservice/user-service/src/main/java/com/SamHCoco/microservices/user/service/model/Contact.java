@@ -19,6 +19,12 @@ public class Contact {
 
     }
 
+    // Constructor for UserBuilder (class for creating users) during Unit Testing
+    public Contact(String email, String phoneNumber){
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

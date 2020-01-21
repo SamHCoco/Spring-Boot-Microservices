@@ -41,6 +41,16 @@ public class User {
 
     }
 
+    // Constructor used in UserBuilder (class to simplify the creating of Users), for use in Unit Testing.
+    public User(Long id, String userName, String firstName, String lastName, Address address, Contact contact) {
+        this.id = id;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.contact = contact;
+    }
+
     public Long getId() {
         return id;
     }

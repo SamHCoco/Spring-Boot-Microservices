@@ -33,6 +33,14 @@ public class Address {
 
     }
 
+    // Constructor used in UserBuilder (class to simplify the creating of Users), for use in Unit Testing.
+    public Address(String street, String city, String postcode, String location) {
+        this.street = street;
+        this.city = city;
+        this.postcode = postcode;
+        this.location = location;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -68,9 +76,9 @@ public class Address {
     @Override
     public String toString(){
         return "  \nADDRESS: \n" +
-                "  street: " + street + "\n" +
-                "  city: " + city + "\n" +
+                "  Street: " + street + "\n" +
+                "  City: " + city + "\n" +
                 "  Postcode: " + postcode + "\n" +
-                "  location: " + location + "\n";
+                "  Location: " + location + "\n";
     }
 }
