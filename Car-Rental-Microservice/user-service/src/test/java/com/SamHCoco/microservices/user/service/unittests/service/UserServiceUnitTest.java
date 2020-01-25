@@ -13,6 +13,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 /*
     The @ContextConfiguration annotation allows us to tell Spring which beans we'd like to
     create, in this case for testing. The SpringBootTest annotation initializes all beans
@@ -52,13 +54,44 @@ public class UserServiceUnitTest {
                 .build();
     }
 
-
+    /**
+     * Tests the getUserDetails(String userName) method, which should return an optional
+     * containing a single User object.
+     */
     @Test
-    public void addUserTest(){
-        Mockito.when(userRepository.existsByuserName(testUser.getUserName()))
+    public void getUserDetailsTest(){
+        Mockito
+                .when(userRepository.findByuserName(testUser.getUserName()))
+                .thenReturn(Optional.of(testUser));
+
+        Assert.assertEquals(userService.getUserDetails(testUser.getUserName()), Optional.of(testUser));
+    }
+
+
+    /**
+     * Tests when addUser() in UserService class is successful (it should return a boolean value of TRUE,
+     * indicating user was successfully added).
+     */
+    @Test
+    public void addUserTestSuccess(){
+        Mockito
+                .when(userRepository.existsByuserName(testUser.getUserName()))
                 .thenReturn(true);
 
         Assert.assertTrue(userService.addUser(testUser));
+    }
+
+    /**
+     * Tests when addUser() in UserService class fails (it should return a boolean value of FALSE,
+     * indicating the user failed to be added).
+     */
+    @Test
+    public void addUserTestFailure(){
+        Mockito
+                .when(userRepository.existsByuserName(testUser.getUserName()))
+                .thenReturn(false);
+
+        Assert.assertFalse(userService.addUser(testUser));
     }
 
 }
