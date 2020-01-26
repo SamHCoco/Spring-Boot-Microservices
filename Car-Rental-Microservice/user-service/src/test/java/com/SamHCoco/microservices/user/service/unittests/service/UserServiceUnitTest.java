@@ -1,5 +1,6 @@
 package com.SamHCoco.microservices.user.service.unittests.service;
 
+import com.SamHCoco.microservices.user.service.UserBuilder;
 import com.SamHCoco.microservices.user.service.model.User;
 import com.SamHCoco.microservices.user.service.repository.UserRepository;
 import com.SamHCoco.microservices.user.service.service.UserService;
