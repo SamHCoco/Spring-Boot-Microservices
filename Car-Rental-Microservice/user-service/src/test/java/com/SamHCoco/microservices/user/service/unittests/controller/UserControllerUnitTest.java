@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,7 +22,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
@@ -38,7 +41,7 @@ public class UserControllerUnitTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final static String USERS_URL = "api/users";
+    private final static String USERS_URL = "/api/users"; // top level end point of User-Service API
 
     @Before
     public void setup(){
@@ -63,13 +66,13 @@ public class UserControllerUnitTest {
      */
     @Test
     public void getUserTestSuccess() throws Exception {
-        Mockito.when(userService.getUserDetails(testUser.getUserName()))
+        when(userService.getUserDetails(testUser.getUserName()))
                .thenReturn(Optional.of(testUser));
 
         String expectedJSON = objectMapper.writeValueAsString(testUser);
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
-                .get(USERS_URL + "/" + testUser.getUserName())
+                .get("/api/users/" +  testUser.getUserName())
                 .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andReturn();
 
@@ -89,7 +92,7 @@ public class UserControllerUnitTest {
                .thenReturn(Optional.empty());
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
-                .get(USERS_URL + "/" + "Non-Existent-User")
+                .get("/api/users/Non-Existent-User")
                 .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andReturn();
 
